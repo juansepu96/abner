@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <link rel="stylesheet" href="./styles/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+    <link rel="stylesheet" href="./styles/style2.css">
+    <script src="./js/cute-alert.js"></script>
+    <title>Inicio de Sesión - Abner </title>
+  </head>
+
+  <body>
+    <div class="container">
+        <div class="row card hoverable">
+            <div class="card-content" style="text-align: center;">
+                <img src="./img/icono.png">
+                <h4 class="center black-text">Inicio de Sesión</h4>
+            <form class="row s12">
+            <div class="col s12">
+                <div class="input-field">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input type="text" id="user" placeholder="Usuario*">
+                </div>
+            </div>
+                <div class="col s12">
+                <div class="input-field">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input type="password" id="password" placeholder="Contraseña*">
+                </div>
+            </div>
+            <div class="col s12">
+                <p><label><input type="checkbox"></label></p>
+            </div>
+            <div class="col s12 center">
+                <button type="button" class="btn btn-large waves-effect waves-light green pulse" onClick="Acceder();">Acceder<i class="material-icons right">send</i></button>
+            </div>
+        </form>
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./js/login.js"></script>
+    
+  </body>
+</html>

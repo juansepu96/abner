@@ -1,0 +1,118 @@
+body{
+    padding: 0;
+    margin: 0;
+    background: rgb(252, 252, 252);
+}
+.btn{
+    margin-top: 10px;
+
+}
+.container{
+    margin:65px auto;
+    width: 35%;
+}
+@media(max-width: 952px){
+    .container{
+        width: 60%;
+    }
+}
+    @media(max-width: 475px){
+    .container{
+        width: 80%;
+    }
+}
+
+.card-content img{
+    display: block;
+    margin:auto;
+    width: 40%;
+    height: 10%;
+}
+
+.nav-wrapper img{
+    width:20%;
+    height: 95%;
+}
+
+.nav-wrapper ul{
+    z-index: 2;
+}
+
+.tabla-clientes{
+    border: 1px solid black;
+    border-spacing: 0;
+    padding: 0;
+}
+
+.tabla-clientes thead {
+    background-color: rgb(235, 232, 232);
+    overflow:auto;
+}
+
+.tabla-caja{
+    border: 1px solid black;
+    border-spacing: 0;
+    padding: 0;
+}
+
+.tabla-caja thead {
+    background-color: rgb(235, 232, 232);
+    overflow:auto;
+}
+
+
+.tabla-clientes tbody :hover{
+    background-color: #2196f3;
+    cursor: pointer;
+    color:white;
+
+}
+
+.modalCliente{
+    width:90%;
+    height: 100%;
+}
+
+.tab .active {
+    background-color: black !important;
+    color:white;
+}
+
+.modalNuevoItem{
+    height: 300px !important;
+}
+
+.eliminar{
+    color:rgba(255, 0, 0, 0.603) !important;
+}
+
+.eliminar :hover{
+    color:red !important;
+    cursor: pointer !important;
+    font-size: 35px !important;
+}
+
+.export{
+    color:rgba(0, 0, 255, 0.589) !important;
+}
+
+.export :hover{
+    color:blue !important;
+    cursor: pointer !important;
+    font-size: 35px !important;
+}
+
+.send{
+    color:rgba(0, 255, 76, 0.589) !important;
+}
+
+.send :hover{
+    color:rgb(0,255,76) !important;
+    cursor: pointer !important;
+    font-size: 35px !important;
+}
+
+.filtros{
+    text-align: center;
+    padding:10px;
+}
