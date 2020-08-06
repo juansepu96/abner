@@ -62,7 +62,7 @@ body{
 
 
 .tabla-clientes tbody :hover{
-    background-color: #2196f3;
+    background-color: rgb(59, 143, 59);
     cursor: pointer;
     color:white;
 

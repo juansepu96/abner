@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
 });
@@ -26,7 +28,6 @@ function CargarUsuarios(){
     });
 }
 
-
 function BuscarUsuarios(){
     id = $("#buscadorCliente").val();
     $(".filaUsuarios").remove();
@@ -53,57 +54,109 @@ function BuscarUsuarios(){
 
 }
 
+function NuevoUsuario(){
+    const elem = document.getElementById('modalNuevoUsuario');
+    const instance = M.Modal.init(elem, {dismissible: false});
+    instance.open();
+}
+
+function Cerrar(){
+    const elem = document.getElementById('modalNuevoUsuario');
+    const instance = M.Modal.init(elem, {dismissible: false});
+    instance.close();
+}
+
+function cargarNuevoUsuario(){
+    datos = [];
+    nombre = $("#nombre").val();
+    usuario = $("#usuario").val();
+    password = $("#password").val(); 
+    perfil = $("#perfil").val();
+    estado = $("#estado").val();
+    datos.push(nombre,usuario,password,perfil,estado);
+    datos = JSON.stringify(datos);
+    if(nombre && usuario && password && perfil && estado){ //Validate OK
+        $.post("./php/NuevoUsuario.php",{valorBusqueda:datos}, function(rta) {
+            if(rta==="OK"){
+                cuteToast({
+                    type: "success", // or 'info', 'error', 'warning'
+                    message: "USUARIO CARGADO CON EXITO",
+                    timer: 3000
+                  })
+                $('#nuevoUsuario')[0].reset();
+                Cerrar();
+                CargarUsuarios();
+            }else{
+                cuteToast({
+                    type: "error", // or 'info', 'error', 'warning'
+                    message: "ERROR AL CARGAR USUARIO. CONTACTE AL ADMINISTRADOR",
+                    timer: 3000
+                  })
+            }
+        });
+    }else{ //Validate NO
+        cuteToast({
+            type: "error", // or 'info', 'error', 'warning'
+            message: "ERROR AL CARGAR USUARIO. COMPLETA TODOS LOS CAMPOS",
+            timer: 3000
+          })
+    }
+
+}
+
 function AbrirUsuario(id){
 
     $.post("./php/ObtenerDatosCliente.php",{valorBusqueda:id})
     .then(function(rta) {
         rta = JSON.parse(rta);
             if(rta.length>0){
-                $("#id_cliente").val(rta[0]['ID']);
-                $("#nombre_cliente").val(rta[0]['nombre']);
-                $("#direccion_cliente").val(rta[0]['direccion']);
-                $("#telefono_cliente").val(rta[0]['telefono']);
-                $("#email_cliente").val(rta[0]['email']);
-                $("#CUIT_cliente").val(rta[0]['CUIT']);
-                CargarDependencias(id);
-                CargarOrdenes(id);
+                $("#id_usuario").val(rta[0].ID);
+                $("#nombre_usuario").val(rta[0].name);
+                $("#username_usuario").val(rta[0].username);
+                $("#password_usuario").val(rta[0].password);
+                $("#perfil_usuario").val(rta[0].profile);
+                $("#estado_usuario").val(rta[0].status);
             }        
     });
 
-    const elem = document.getElementById('modalFichaUsuario');
+    const elem = document.getElementById('modalVerUsuario');
     const instance = M.Modal.init(elem, {dismissible: false});
     instance.open();
 
 }
 
-function cargarNuevoUsuario(){
+
+function CerrarVerUsuario(){
+    const elem = document.getElementById('modalVerUsuario');
+    const instance = M.Modal.init(elem, {dismissible: false});
+    instance.close();
+}
+
+
+function ActualizarUsuario(){
     datos = [];
-    suma = 0;
-    nombre = $("#nombre").val();
-    direccion = $("#direccion").val();
-    telefono = $("#telefono").val(); 
-    cuit = $("#CUIT").val();
-    email = $("#email").val();
-    if(nombre) suma ++;
-    if(direccion) suma ++;
-    if(telefono) suma ++;
-    if(cuit) suma ++;
-    if(email) suma ++;
-    datos.push(nombre,direccion,telefono,cuit,email);
+    id=$("#id_usuario").val();
+    nombre = $("#nombre_usuario").val();
+    usuario = $("#username_usuario").val();
+    password = $("#password_usuario").val(); 
+    perfil = $("#perfil_usuario").val();
+    estado = $("#estado_usuario").val();
+    datos.push(id,nombre,usuario,password,perfil,estado);
     datos = JSON.stringify(datos);
-    if(suma===5){ //Validate OK
-        $.post("NuevoCliente.php",{valorBusqueda:datos}, function(rta) {
+    if(nombre && usuario && password && perfil && estado && id){ //Validate OK
+        $.post("./php/ActualizarUsuario.php",{valorBusqueda:datos}, function(rta) {
             if(rta==="OK"){
                 cuteToast({
                     type: "success", // or 'info', 'error', 'warning'
-                    message: "CLIENTE CARGADO CON EXITO",
+                    message: "USUARIO ACTUALIZADO CON EXITO",
                     timer: 3000
                   })
-                $('#verCliente')[0].reset();
+                CargarUsuarios();
+                AbrirUsuario(id);
             }else{
                 cuteToast({
                     type: "error", // or 'info', 'error', 'warning'
-                    message: "ERROR AL CARGAR CLIENTE. CONTACTE AL ADMINISTRADOR",
+                    message: "ERROR AL ACTUALIZAR USUARIO. CONTACTE AL ADMINISTRADOR",
                     timer: 3000
                   })
             }
@@ -111,96 +164,8 @@ function cargarNuevoUsuario(){
     }else{ //Validate NO
         cuteToast({
             type: "error", // or 'info', 'error', 'warning'
-            message: "ERROR AL CARGAR CLIENTE. COMPLETA TODOS LOS CAMPOS",
-            timer: 3000
-          })
-    }
-
-}
-
-function Cerrar(){
-    const elem = document.getElementById('modalVerCliente');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.close();
-}
-
-function CerrarVerCliente(){
-    const elem = document.getElementById('modalFichaCliente');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.close();
-}
-
-function AbrirUsuario(id){
-
-    $.post("ObtenerDatosCliente.php",{valorBusqueda:id}, function(rta) {
-        rta = JSON.parse(rta);
-        if(rta){ 
-            if(rta){
-                $("#id_cliente").val(rta[0]['ID']);
-                $("#nombre_cliente").val(rta[0]['nombre']);
-                $("#direccion_cliente").val(rta[0]['direccion']);
-                $("#telefono_cliente").val(rta[0]['telefono']);
-                $("#email_cliente").val(rta[0]['email']);
-                $("#CUIT_cliente").val(rta[0]['CUIT']);
-                CargarDependencias(id);
-                CargarOrdenes(id);
-            }            
-        };
-    });
-
-
-    
-    const elem = document.getElementById('modalFichaCliente');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.open();
-
-}
-
-function NuevoCliente(){
-    const elem = document.getElementById('modalVerCliente');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.open();
-}
-
-function ActualizarCliente(){
-    datos = [];
-    suma = 0;
-    id = $("#id_cliente").val();
-    nombre = $("#nombre_cliente").val();
-    direccion = $("#direccion_cliente").val();
-    telefono = $("#telefono_cliente").val(); 
-    cuit = $("#CUIT_cliente").val();
-    email = $("#email_cliente").val();
-    if(nombre) suma ++;
-    if(direccion) suma ++;
-    if(telefono) suma ++;
-    if(cuit) suma ++;
-    if(email) suma ++;
-    datos.push(id,nombre,direccion,telefono,cuit,email);
-    datos = JSON.stringify(datos);
-    if(suma===5){ //Validate OK
-        $.post("ActualizarCliente.php",{valorBusqueda:datos}, function(rta) {
-            if(rta==="OK"){
-                cuteToast({
-                    type: "success", // or 'info', 'error', 'warning'
-                    message: "CLIENTE ACTUALIZADO CON EXITO",
-                    timer: 3000
-                  })
-                AbrirCliente(id);
-            }else{
-                cuteToast({
-                    type: "error", // or 'info', 'error', 'warning'
-                    message: "ERROR AL ACTUALIZAR CLIENTE. CONTACTE AL ADMINISTRADOR",
-                    timer: 3000
-                  })
-            }
-        });
-    }else{ //Validate NO
-        cuteToast({
-            type: "error", // or 'info', 'error', 'warning'
-            message: "ERROR AL ACTUALIZAR CLIENTE. COMPLETA TODOS LOS CAMPOS",
+            message: "ERROR AL ACTUALIZAR USUARIO. COMPLETA TODOS LOS CAMPOS",
             timer: 3000
           })
     }
 }
-

@@ -13,9 +13,92 @@
     <title>Stock - Abner </title>
   </head>
 
-  <body>
-    <div id="contenedor" class="container-fluid">
+  <body onload="CargarProductos();"> 
+    <div  class="container-fluid">
+      <div id="contenedor"></div>
+
+      <div id="buscador"> <!--Buscador-->
+        <div class="row" style="margin-left:27%;margin-top: 2%;">
+            <form class="col s10" >
+              <div class="row" >
+                <div class="input-field col s6">
+                  <textarea id="buscadorProducto" class="materialize-textarea"></textarea>
+                  <label for="buscadorProducto" >Búsqueda</label>
+                </div>
+                <a class="waves-effect waves-light btn-large green" style="margin-top:10px;" onClick="BuscarProductos();"><i class="material-icons left" style="font-size:2rem;">search</i>Buscar</a>
+              </div>
+            </form>
+          </div>
+    </div>
+
+    <div id="productos"> <!--Tabla Productos-->
+      <div style="text-align: right;margin-right:50px;">
+        <div class="input-field col s2">
+          <button class="btn waves-effect waves-light green" type="button" onclick="NuevoProducto();" name="action">Nuevo Producto<i class="material-icons left">add</i>
+          </button>
+        </div>
+      </div>
         
+        <table class="responsive-table centered tabla-clientes" id="tabla-productos" >
+            <thead>
+              <tr>
+                  <th>CODIGO</th>
+                  <th>NOMBRE</th>
+                  <th>PRECIO VENTA</th>
+                  <th>PRECIO COMPRA</th>
+                  <th>STOCK</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        <div id="errorBusqueda" style="text-align: center;">
+
+        </div>
+    </div>
+
+    <div id="modalNuevoProducto" class="modal"> <!--Nuevo Producto-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Nuevo producto</h5>
+                  <form id="nuevoproducto" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input  id="codigo" required type="text" >
+                        <label for="codigo">Codigo</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input  id="nombre" required type="text" >
+                        <label for="nombre">NOMBRE</label>
+                     </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="input-field col s3">
+                        <input  id="precio_p" required type="text" >
+                        <label for="precio_p">Precio de Compra</label>
+                      </div>
+                      <div class="input-field col s3">
+                        <input  id="precio_s" required type="text" >
+                        <label for="precio_s">Precio de Venta</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input  id="stock" required type="text" >
+                        <label for="stock">Stock</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="cargarProducto();" name="action">Cargar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="Cerrar();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
     </div>
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
