@@ -19,15 +19,14 @@
 
       <div id="buscador"> <!--Buscador-->
         <div class="row" style="margin-left:27%;margin-top: 2%;">
-            <form class="col s10" >
+            
               <div class="row" >
                 <div class="input-field col s6">
-                  <textarea id="buscadorProducto" class="materialize-textarea"></textarea>
+                  <input id="buscadorProducto" type="text" ></input>
                   <label for="buscadorProducto" >Búsqueda</label>
                 </div>
                 <a class="waves-effect waves-light btn-large green" style="margin-top:10px;" onClick="BuscarProductos();"><i class="material-icons left" style="font-size:2rem;">search</i>Buscar</a>
               </div>
-            </form>
           </div>
     </div>
 
@@ -65,26 +64,26 @@
                   <form id="nuevoproducto" class="col s12">
                     <div class="row">
                       <div class="input-field col s6">
-                        <input  id="codigo" required type="text" >
+                        <input  id="codigo" required type="text" value=" ">
                         <label for="codigo">Codigo</label>
                       </div>
                       <div class="input-field col s6">
-                        <input  id="nombre" required type="text" >
+                        <input  id="nombre" required type="text" value=" ">
                         <label for="nombre">NOMBRE</label>
                      </div>
                     </div>
 
                     <div class="row">
                       <div class="input-field col s3">
-                        <input  id="precio_p" required type="text" >
+                        <input  id="precio_p" required type="text" value=" ">
                         <label for="precio_p">Precio de Compra</label>
                       </div>
                       <div class="input-field col s3">
-                        <input  id="precio_s" required type="text" >
+                        <input  id="precio_s" required type="text" value=" ">
                         <label for="precio_s">Precio de Venta</label>
                       </div>
                       <div class="input-field col s2">
-                        <input  id="stock" required type="text" >
+                        <input  id="stock" required type="text" value=" ">
                         <label for="stock">Stock</label>
                       </div>
                       <div class="input-field col s2">
@@ -93,6 +92,50 @@
                       </div>
                       <div class="input-field col s2">
                         <button class="btn waves-effect waves-light red" type="button" onclick="Cerrar();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalEditarProducto" class="modal"> <!--Editar Producto-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Editar producto</h5>
+                  <form id="editarproducto" class="col s12">
+                    <div class="row">
+                      <input hidden type="text" id="id_producto">
+                      <div class="input-field col s6">
+                        <input  id="codigo_producto" required type="text" value=" ">
+                        <label for="codigo_producto">Codigo</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input  id="nombre_producto" required type="text" value=" " >
+                        <label for="nombre_producto">NOMBRE</label>
+                     </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="input-field col s3">
+                        <input  id="precio_p_producto" required type="text" value=" ">
+                        <label for="precio_p_producto">Precio de Compra</label>
+                      </div>
+                      <div class="input-field col s3">
+                        <input  id="precio_s_producto" required type="text" value=" ">
+                        <label for="precio_s_producto">Precio de Venta</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input  id="stock_producto" required type="text" value=" ">
+                        <label for="stock_producto">Stock</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="ActualizarProducto();" name="action">Actualizar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarEditarProducto();" name="action">Cerrar<i class="material-icons left">close</i>
                         </button>
                       </div>
                     </div>
