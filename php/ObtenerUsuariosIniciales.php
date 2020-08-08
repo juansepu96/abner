@@ -1,6 +1,6 @@
 <?php
 
-require_once "PDO.php";
+require_once "pdo.php";
 
 $ObtenerUsuarios = $conexion->prepare("SELECT * from users ORDER BY name ASC");
 $ObtenerUsuarios->execute();

@@ -1,6 +1,6 @@
 <?php
 
-require_once "PDO.php";
+require_once "pdo.php";
 
 $datos = $_POST['valorBusqueda'];
 $datos=json_decode($datos);

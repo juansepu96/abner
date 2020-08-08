@@ -125,13 +125,11 @@ function AbrirUsuario(id){
 
 }
 
-
 function CerrarVerUsuario(){
     const elem = document.getElementById('modalVerUsuario');
     const instance = M.Modal.init(elem, {dismissible: false});
     instance.close();
 }
-
 
 function ActualizarUsuario(){
     datos = [];

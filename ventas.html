@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
     <script src="./js/cute-alert.js"></script>
     <link rel="stylesheet" href="./styles/style2.css">
+    <script src="https://momentjs.com/downloads/moment.min.js"></script> <!--Moments Library-->
     <title>Ventas - Abner </title>
   </head>
 
@@ -125,10 +126,143 @@
       </div>
     </div>
 
-
-
-        
+    <div id="modalAjuste" class="modal"> <!-- Nuevo Ajuste -->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Nuevo Ajuste</h5>
+                  <form id="ajustes" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s4">
+                        <input type="text" value="" id="detalle_item">
+                        <label for="detalle_item">Detalle</label>
+                      </div>
+                      <div class="input-field col s4">
+                        <input type="text" value="" id="importe_item">
+                        <label for="importe_item">Importe</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="CargarAjuste();" name="action">Cargar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarCargarAjuste();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
     </div>
+
+    <div id="modalMetodo" class="modal"> <!-- Metodo de pago -->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Metodo de pago</h5>
+                  <form id="metodo" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <input type="text" value=" " id="efectivo">
+                        <label for="efectivo">EFECTIVO</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input type="text" value="0.00" id="mp">
+                        <label for="mp">M. PAGO</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input type="text" value="0.00" id="tarjeta">
+                        <label for="tarjeta">TARJETA</label>
+                      </div>
+                      <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="CargarVenta();" name="action">FINALIZAR VENTA<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarMetodoPago();" name="action">CERRAR<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalListarVentas" class="modal modalCliente"> <!--Listar ventas-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>LISTA DE VENTAS</h5>
+                  <form id="listarventas" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6" >
+                        <input type="date" id="filter_fecha_desde" onchange="ActualizarVentas();">
+                        <label for="filter_fecha_desde">DESDE: </label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input type="date" id="filter_fecha_hasta" onchange="ActualizarVentas();">
+                        <label for ="filter_fecha_hasta">HASTA: </label>
+                      </div>
+                     
+                    </div>
+                    <div class="row">
+                      <table class="responsive-table centered tabla-clientes" id="tabla-listarventas" >
+                        <thead>
+                          <tr>
+                              <th>FECHA</th>
+                              <th>HORA</th>
+                              <th>TOTAL</th>
+                              <th>EFECTIVO</th>
+                              <th>M. PAGO</th>
+                              <th>TARJETA</th>
+                              <th>VENDEDOR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarListarVentas();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalVerVenta" class="modal"> <!--Ver una venta-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Ver venta</h5>
+                  <form id="elegirproducto" class="col s12">
+                    <div class="row">
+                      <table class="responsive-table centered tabla-clientes" id="tabla-verventa" >
+                        <thead>
+                          <tr>
+                              <th>CODIGO</th>
+                              <th>NOMBRE</th>
+                              <th>PRECIO</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarVerVenta();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+
+  </div>
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

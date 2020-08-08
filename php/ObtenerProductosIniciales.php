@@ -1,6 +1,6 @@
 <?php
 
-require_once "PDO.php";
+require_once "pdo.php";
 
 $GetProductos = $conexion->prepare("SELECT * from products ORDER BY name ASC");
 $GetProductos->execute();
