@@ -6,7 +6,7 @@ $datos = $_POST['valorBusqueda'];
 $datos=json_decode($datos);
 
 $date=date("Y-m-d");
-$time=date("H:i");
+$time=date("H:i:s");
 $saler=$_SESSION['name'];
 
 $rta=null;

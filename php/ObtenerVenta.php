@@ -4,7 +4,7 @@ require_once "pdo.php";
 
 $datos=$_POST['valorBusqueda'];
 
-$ObtenerDetalles = $conexion->prepare("SELECT * from sales_datail WHERE (sale_ID=:dato) ORDER BY ID ASC");
+$ObtenerDetalles = $conexion->prepare("SELECT * from sales_detail WHERE (sale_ID=:dato) ORDER BY ID ASC");
 $ObtenerDetalles -> bindParam(':dato',$datos);
 $ObtenerDetalles->execute();
 

@@ -408,12 +408,11 @@ function VerVenta(id){
   .then((array)=>{
     array = JSON.parse(array);
     for(var i = 1;i<array.length;i++){
-      total=total+parseFloat(array[i].precio);
-      precio = parseFloat(array[i].precio);
+      precio = parseFloat(array[i].price_s);
       precio = precio.toFixed(2);
       var htmlTags = '<tr class="filaVerVenta">' +
-                      '<td>' + array[i].codigo + '</td>'+
-                      '<td>' + array[i].nombre + '</td>'+
+                      '<td>' + array[i].code + '</td>'+
+                      '<td>' + array[i].name + '</td>'+
                       '<td> $' + precio + '</td>'+
                       '</tr>';
       $('#tabla-verventa tbody').append(htmlTags);

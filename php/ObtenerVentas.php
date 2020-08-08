@@ -5,7 +5,7 @@ require_once "pdo.php";
 $datos=$_POST['valorBusqueda'];
 $datos = json_decode($datos);
 
-$ObtenerVentas = $conexion->prepare("SELECT * from sales WHERE (date BETWEEN :date1 and :date2) ORDER BY ID ASC");
+$ObtenerVentas = $conexion->prepare("SELECT * from sales WHERE (date BETWEEN :date1 and :date2) ORDER BY ID DESC");
 $ObtenerVentas -> bindParam(':date1',$datos[0]);
 $ObtenerVentas -> bindParam(':date2',$datos[1]);
 $ObtenerVentas->execute();
