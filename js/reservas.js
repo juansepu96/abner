@@ -11,12 +11,9 @@ $(document).ready(function() {
           BuscarProductos();
       }
     });
-
-   
-
 });
 
-var guardado = localStorage.getItem('arrayVentas');
+var guardado = localStorage.getItem('arrayReservas');
 var guardado=JSON.parse(guardado);
 
 if(!guardado){
@@ -42,12 +39,12 @@ function ActualizarTabla(array){
                     '<td> $' + precio + '</td>'+
                     '<td><div class="eliminar"><i onclick="EliminarItem('+i+');AumentarStock('+array[i].id+');" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
                     '</tr>';
-    $('#tabla-venta tbody').append(htmlTags);
+    $('#tabla-reserva tbody').append(htmlTags);
   }
   total=parseFloat(total);
   total = total.toFixed(2);
   $("#totalizador").val(total);
-  localStorage.setItem('arrayVentas', JSON.stringify(array));
+  localStorage.setItem('arrayReservas', JSON.stringify(array));
 }
 
 function BuscarProductos(){
@@ -64,7 +61,6 @@ function BuscarProductos(){
                 nombre : rta[0].name,
                 precio : rta[0].price_s,
                 precio_compra : rta[0].price_p
-
               }
               arrayProductos.push(producto);
               ActualizarTabla(arrayProductos); 
@@ -190,10 +186,10 @@ function CargarAjuste(){
   
 }
 
-function DescartarVenta(){
+function DescartarReserva(){
   cuteAlert({
     type: "question",
-    title: "¿REALMENTE QUIERE DESCARTAR LA VENTA?",
+    title: "¿REALMENTE QUIERE DESCARTAR LA RESERVA?",
     message: "ESTA ACCION ES IRREVERSIBLE",
     confirmText: "Aceptar",
     cancelText: "Cancelar"
@@ -203,7 +199,7 @@ function DescartarVenta(){
       ActualizarTabla(arrayProductos);
       cuteToast({
         type: "success", // or 'info', 'error', 'warning'
-        message: "SE DESCARTÓ LA VENTA",
+        message: "SE DESCARTÓ LA RESERVA",
         timer: 3000
       });
   } else {
@@ -228,13 +224,50 @@ function CerrarMetodoPago(){
   instance.close();
 }
 
-function GuardarVenta(){
+function GuardarReserva(){
   if(arrayProductos.length>1){
     total = $("#totalizador").val();
-    $("#efectivo").val(total);
-    const elem = document.getElementById('modalMetodo');
-    const instance = M.Modal.init(elem, {dismissible: false});
-    instance.open();
+    cuteAlert({
+        type: "question",
+        title: "¿REALMENTE QUIERE GUARDAR LA RESERVA?",
+        message: "ESTA ACCION ES IRREVERSIBLE",
+        confirmText: "Aceptar",
+        cancelText: "Cancelar"
+        }).then((e)=>{
+            if ( e == ("confirm")){
+                  $.post("./php/InsertarEncabezadoReserva.php",{valorBusqueda:total}) 
+                  .then((id)=>{
+                    arrayProductos.push(id);
+                    detalles = JSON.stringify(arrayProductos);
+                    $.post("./php/InsertarDetallesReserva.php",{valorBusqueda:detalles})
+                    .then((rta)=>{
+                      if(rta=="OK"){
+                        cuteToast({
+                          type: "success", // or 'info', 'error', 'warning'
+                          message: "RESERVA GUARDADA CON ÉXITO",
+                          timer: 3000
+                        });
+                        arrayProductos=[{}];
+                        ActualizarTabla(arrayProductos);
+                      }else{
+                        cuteToast({
+                          type: "error", // or 'info', 'error', 'warning'
+                          message: "ERROR AL GUARDAR RESERVA. CONTACTE AL ADMINISTRADOR.",
+                          timer: 3000
+                        });
+                      }
+                      
+                    });
+                  });         
+          } else {
+            cuteToast({
+                type: "info", // or 'info', 'error', 'warning'
+                message: "ACCION CANCELADA",
+                timer: 3000
+              })
+            }
+      })
+
   }else{
     cuteToast({
       type: "error", // or 'info', 'error', 'warning'
@@ -245,7 +278,18 @@ function GuardarVenta(){
   
 }
 
+function ConfirmarVenta(){
+    total = $("#totalizador_2").val();
+    $("#efectivo").val(total);
+    CerrarVerReserva();
+    CerrarListarReservas();
+    const elem = document.getElementById('modalMetodo');
+    const instance = M.Modal.init(elem, {dismissible: false});
+    instance.open();    
+}
+
 function CargarVenta(){
+  id=$("#id_reserva").val();
   var datos = [];
   efectivo = $("#efectivo").val();
   efectivo= efectivo.replace(",",".");
@@ -256,45 +300,34 @@ function CargarVenta(){
   tarjeta = $("#tarjeta").val();
   tarjeta= tarjeta.replace(",",".");
   tarjeta = parseFloat(tarjeta);
-  total = $("#totalizador").val();
-  total = parseFloat(total);
-  datos.push(total,efectivo,mp,tarjeta);
+  datos.push(efectivo,mp,tarjeta,id);
   datos = JSON.stringify(datos);
   if(total == (efectivo+mp+tarjeta)){
     CerrarMetodoPago();
     cuteAlert({
       type: "question",
-      title: "¿REALMENTE QUIERE GUARDAR LA VENTA?",
+      title: "¿REALMENTE QUIERE CONFIRMAR LA VENTA?",
       message: "ESTA ACCION ES IRREVERSIBLE",
       confirmText: "Aceptar",
       cancelText: "Cancelar"
       }).then((e)=>{
           if ( e == ("confirm")){
-                $.post("./php/InsertarEncabezadoVenta.php",{valorBusqueda:datos}) 
-                .then((id)=>{
-                  arrayProductos.push(id);
-                  detalles = JSON.stringify(arrayProductos);
-                  $.post("./php/InsertarDetallesVenta.php",{valorBusqueda:detalles})
-                  .then((rta)=>{
+                $.post("./php/ReservaAVenta.php",{valorBusqueda:datos}) 
+                .then((rta)=>{
                     console.log(rta);
-                    
-                    if(rta=="OK"){
-                      cuteToast({
+                  if(rta=="OK"){
+                    cuteToast({
                         type: "success", // or 'info', 'error', 'warning'
-                        message: "VENTA GUARDADA CON ÉXITO",
+                        message: "SE CARGO LA VENTA",
                         timer: 3000
-                      });
-                      arrayProductos=[{}];
-                      ActualizarTabla(arrayProductos);
-                    }else{
-                      cuteToast({
+                      })
+                  }else{
+                    cuteToast({
                         type: "error", // or 'info', 'error', 'warning'
-                        message: "ERROR AL GUARDAR VENTA. CONTACTE AL ADMINISTRADOR.",
+                        message: "ERROR AL CARGAR VENTA. CONTACTE AL ADMINISTRADOR.",
                         timer: 3000
-                      });
-                    }
-                    
-                  });
+                      })
+                  }
                 });         
         } else {
           cuteToast({
@@ -313,14 +346,14 @@ function CargarVenta(){
   }
 }
 
-function AbrirListarVentas(){
-  const elem = document.getElementById('modalListarVentas');
+function AbrirListarReservas(){
+  const elem = document.getElementById('modalListarReservas');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.open();
 }
 
-function ListarVentas(){
-  $(".filaVentas").remove();
+function ListarReservas(){
+  $(".filaReservas").remove();
   fecha = moment().subtract(1, 'year');
   fecha = moment(fecha).format("YYYY-MM-DD");
   fecha2 = moment().format("YYYY-MM-DD");
@@ -329,7 +362,7 @@ function ListarVentas(){
   var datos = [];
   datos.push(fecha,fecha2);
   datos = JSON.stringify(datos);
-  $.post("./php/ObtenerVentas.php",{valorBusqueda:datos})
+  $.post("./php/ObtenerReservas.php",{valorBusqueda:datos})
   .then((rta)=>{
     rta = JSON.parse(rta);
     if(rta.length>0){
@@ -337,44 +370,36 @@ function ListarVentas(){
         fecha = moment(rta[i].date).format("DD/MM/YYYY");
         total = parseFloat(rta[i].total);
         total = total.toFixed(2);
-        efectivo = parseFloat(rta[i].total_cash);
-        efectivo = efectivo.toFixed(2);
-        mp = parseFloat(rta[i].total_mp);
-        mp = mp.toFixed(2);
-        tarjeta = parseFloat(rta[i].total_card);
-        tarjeta = tarjeta.toFixed(2);
-        var htmlTags = '<tr class="filaVentas" onclick="VerVenta('+rta[i].ID+');">' +
+       
+        var htmlTags = '<tr class="filaReservas" onclick="VerReserva('+rta[i].ID+');">' +
                         '<td>' + fecha + '</td>'+
                         '<td>' + rta[i].time + '</td>'+
                         '<td> $ ' + total + '</td>'+
-                        '<td> $ ' + efectivo + '</td>'+
-                        '<td> $ ' + mp + '</td>'+
-                        '<td> $ ' + tarjeta + '</td>'+
                         '<td>' + rta[i].saler + '</td>'+
                         '</tr>';
-        $('#tabla-listarventas tbody').append(htmlTags);
+        $('#tabla-listarreservas tbody').append(htmlTags);
       }
     }
   })
-  const elem = document.getElementById('modalListarVentas');
+  const elem = document.getElementById('modalListarReservas');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.open();
 }
 
-function CerrarListarVentas(){
-  const elem = document.getElementById('modalListarVentas');
+function CerrarListarReservas(){
+  const elem = document.getElementById('modalListarReservas');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.close();
 }
 
-function ActualizarVentas(){
-  $(".filaVentas").remove();
+function ActualizarReservas(){
+  $(".filaReservas").remove();
   fecha = $("#filter_fecha_desde").val();
   fecha2 =  $("#filter_fecha_hasta").val();
   var datos = [];
   datos.push(fecha,fecha2);
   datos = JSON.stringify(datos);
-  $.post("./php/ObtenerVentas.php",{valorBusqueda:datos})
+  $.post("./php/ObtenerReservas.php",{valorBusqueda:datos})
   .then((rta)=>{
     rta = JSON.parse(rta);
     if(rta.length>0){
@@ -382,52 +407,49 @@ function ActualizarVentas(){
         fecha = moment(rta[i].date).format("DD/MM/YYYY");
         total = parseFloat(rta[i].total);
         total = total.toFixed(2);
-        efectivo = parseFloat(rta[i].total_cash);
-        efectivo = efectivo.toFixed(2);
-        mp = parseFloat(rta[i].total_mp);
-        mp = mp.toFixed(2);
-        tarjeta = parseFloat(rta[i].total_card);
-        tarjeta = tarjeta.toFixed(2);
-        var htmlTags = '<tr class="filaVentas" onclick="VerVenta('+rta[i].ID+');">' +
+        var htmlTags = '<tr class="filaReservas" onclick="VerReserva('+rta[i].ID+');">' +
                         '<td>' + fecha + '</td>'+
                         '<td>' + rta[i].time + '</td>'+
                         '<td> $ ' + total + '</td>'+
-                        '<td> $ ' + efectivo + '</td>'+
-                        '<td> $ ' + mp + '</td>'+
-                        '<td> $ ' + tarjeta + '</td>'+
                         '<td>' + rta[i].saler + '</td>'+
                         '</tr>';
-        $('#tabla-listarventas tbody').append(htmlTags);
+        $('#tabla-listarreservas tbody').append(htmlTags);
       }
     }
   })
 }
 
-function VerVenta(id){
-  $(".filaVerVenta").remove();
-  $.post('./php/ObtenerVenta.php',{valorBusqueda:id})
+function VerReserva(id){
+  $("#id_reserva").val(id);
+  $(".filaVerReserva").remove();
+  $.post('./php/ObtenerReserva.php',{valorBusqueda:id})
   .then((array)=>{
+    total=0;
     array = JSON.parse(array);
     for(var i = 0;i<array.length;i++){
       precio = parseFloat(array[i].price_s);
+      total=total+precio;
       precio = precio.toFixed(2);
-      var htmlTags = '<tr class="filaVerVenta">' +
+      var htmlTags = '<tr class="filaVerReserva">' +
                       '<td>' + array[i].code + '</td>'+
                       '<td>' + array[i].name + '</td>'+
                       '<td> $' + precio + '</td>'+
                       '</tr>';
-      $('#tabla-verventa tbody').append(htmlTags);
+      $('#tabla-verreserva tbody').append(htmlTags);
     }
   });
-  CerrarListarVentas();
-  const elem = document.getElementById('modalVerVenta');
+  total=parseFloat(total);
+  total = total.toFixed(2);
+  $("#totalizador_2").val(total);
+  CerrarListarReservas();
+  const elem = document.getElementById('modalVerReserva');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.open();
 }
 
-function CerrarVerVenta(){
-  const elem = document.getElementById('modalVerVenta');
+function CerrarVerReserva(){
+  const elem = document.getElementById('modalVerReserva');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.close();
-  AbrirListarVentas();
+  AbrirListarReservas();
 }

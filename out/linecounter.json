@@ -1,0 +1,321 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\xampp\\htdocs\\abner",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2020-08-08 18:01:39",
+            "filesum": 46,
+            "codesum": 2535,
+            "commentsum": 65,
+            "blanksum": 364,
+            "statistics": {
+                ".html": {
+                    "code": 712,
+                    "comment": 28,
+                    "blank": 63
+                },
+                ".js": {
+                    "code": 892,
+                    "comment": 35,
+                    "blank": 83
+                },
+                ".php": {
+                    "code": 316,
+                    "comment": 2,
+                    "blank": 155
+                },
+                ".css": {
+                    "code": 413,
+                    "comment": 0,
+                    "blank": 63
+                },
+                ".svg": {
+                    "code": 202,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 9,
+                    "code": 61,
+                    "comment": 2,
+                    "filename": "backup.php"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 4,
+                    "filename": "cerrar.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 4,
+                    "filename": "contable.html"
+                },
+                {
+                    "filename": "img\\icono.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 2,
+                    "code": 43,
+                    "comment": 4,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 28,
+                    "code": 126,
+                    "comment": 1,
+                    "filename": "js\\cute-alert.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "js\\img\\error.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "js\\img\\info.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "js\\img\\question.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "js\\img\\success.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "js\\img\\warning.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 1,
+                    "filename": "js\\login.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 172,
+                    "comment": 10,
+                    "filename": "js\\stock.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 156,
+                    "comment": 10,
+                    "filename": "js\\usuarios.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "js\\validacionMenu.js"
+                },
+                {
+                    "blank": 33,
+                    "code": 399,
+                    "comment": 13,
+                    "filename": "js\\ventas.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "menuAdmin.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "menuRevendedor.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "menuVendedor.html"
+                },
+                {
+                    "blank": 7,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "php\\Acceder.php"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "php\\ActualizarProducto.php"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "php\\ActualizarUsuario.php"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "php\\AumentarStock.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "php\\BuscarProductoPorID.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "php\\BuscarProductos.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "php\\BuscarProductos2.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "php\\BuscarUsuarios.php"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "php\\DisminuirStock.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "php\\InsertarDetallesVenta.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "php\\InsertarEncabezadoVenta.php"
+                },
+                {
+                    "blank": 6,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "php\\NuevoProducto.php"
+                },
+                {
+                    "blank": 6,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "php\\NuevoUsuario.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "php\\ObtenerDatosCliente.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "php\\ObtenerDatosProducto.php"
+                },
+                {
+                    "blank": 7,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "php\\ObtenerProductosIniciales.php"
+                },
+                {
+                    "blank": 5,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "php\\ObtenerRol.php"
+                },
+                {
+                    "blank": 7,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "php\\ObtenerUsuariosIniciales.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "php\\ObtenerVenta.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "php\\ObtenerVentas.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "php\\pdo.php"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 4,
+                    "filename": "reservas.html"
+                },
+                {
+                    "blank": 11,
+                    "code": 137,
+                    "comment": 4,
+                    "filename": "stock.html"
+                },
+                {
+                    "blank": 21,
+                    "code": 97,
+                    "comment": 0,
+                    "filename": "styles\\style.css"
+                },
+                {
+                    "blank": 42,
+                    "code": 316,
+                    "comment": 0,
+                    "filename": "styles\\style2.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 154,
+                    "comment": 4,
+                    "filename": "usuarios.html"
+                },
+                {
+                    "blank": 25,
+                    "code": 243,
+                    "comment": 4,
+                    "filename": "ventas.html"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2020-08-08 18:01:39
+count workspace : c:\xampp\htdocs\abner
+total files : 46
+total code lines : 2535
+total comment lines : 65
+total blank lines : 364
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |          .html|            712|             28|             63|     28|
+   |            .js|            892|             35|             83|     35|
+   |           .php|            316|              2|            155|     12|
+   |           .css|            413|              0|             63|     16|
+   |           .svg|            202|              0|              0|    8.0|
+   -------------------------------------------------------------------------
+backup.php, code is 61, comment is 2, blank is 9.
+cerrar.html, code is 20, comment is 4, blank is 2.
+contable.html, code is 20, comment is 4, blank is 2.
+img\icono.png, it is a binary file.
+index.html, code is 43, comment is 4, blank is 2.
+js\cute-alert.js, code is 126, comment is 1, blank is 28.
+js\img\error.svg, code is 39, comment is 0, blank is 0.
+js\img\info.svg, code is 40, comment is 0, blank is 0.
+js\img\question.svg, code is 44, comment is 0, blank is 0.
+js\img\success.svg, code is 39, comment is 0, blank is 0.
+js\img\warning.svg, code is 40, comment is 0, blank is 0.
+js\login.js, code is 25, comment is 1, blank is 0.
+js\stock.js, code is 172, comment is 10, blank is 8.
+js\usuarios.js, code is 156, comment is 10, blank is 13.
+js\validacionMenu.js, code is 14, comment is 0, blank is 1.
+js\ventas.js, code is 399, comment is 13, blank is 33.
+menuAdmin.html, code is 31, comment is 0, blank is 2.
+menuRevendedor.html, code is 21, comment is 0, blank is 2.
+menuVendedor.html, code is 23, comment is 0, blank is 2.
+php\Acceder.php, code is 20, comment is 0, blank is 7.
+php\ActualizarProducto.php, code is 17, comment is 0, blank is 5.
+php\ActualizarUsuario.php, code is 17, comment is 0, blank is 5.
+php\AumentarStock.php, code is 11, comment is 0, blank is 5.
+php\BuscarProductoPorID.php, code is 9, comment is 0, blank is 8.
+php\BuscarProductos.php, code is 11, comment is 0, blank is 8.
+php\BuscarProductos2.php, code is 10, comment is 0, blank is 8.
+php\BuscarUsuarios.php, code is 11, comment is 0, blank is 8.
+php\DisminuirStock.php, code is 11, comment is 0, blank is 5.
+php\InsertarDetallesVenta.php, code is 17, comment is 0, blank is 8.
+php\InsertarEncabezadoVenta.php, code is 24, comment is 0, blank is 8.
+php\NuevoProducto.php, code is 16, comment is 0, blank is 6.
+php\NuevoUsuario.php, code is 16, comment is 0, blank is 6.
+php\ObtenerDatosCliente.php, code is 9, comment is 0, blank is 8.
+php\ObtenerDatosProducto.php, code is 9, comment is 0, blank is 8.
+php\ObtenerProductosIniciales.php, code is 7, comment is 0, blank is 7.
+php\ObtenerRol.php, code is 4, comment is 0, blank is 5.
+php\ObtenerUsuariosIniciales.php, code is 7, comment is 0, blank is 7.
+php\ObtenerVenta.php, code is 9, comment is 0, blank is 8.
+php\ObtenerVentas.php, code is 11, comment is 0, blank is 8.
+php\pdo.php, code is 9, comment is 0, blank is 8.
+reservas.html, code is 20, comment is 4, blank is 2.
+stock.html, code is 137, comment is 4, blank is 11.
+styles\style.css, code is 97, comment is 0, blank is 21.
+styles\style2.css, code is 316, comment is 0, blank is 42.
+usuarios.html, code is 154, comment is 4, blank is 13.
+ventas.html, code is 243, comment is 4, blank is 25.
+===============================================================================

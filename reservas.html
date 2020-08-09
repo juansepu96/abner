@@ -10,17 +10,271 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
     <script src="./js/cute-alert.js"></script>
     <link rel="stylesheet" href="./styles/style2.css">
+    <script src="https://momentjs.com/downloads/moment.min.js"></script> <!--Moments Library-->
     <title>Reservas - Abner </title>
   </head>
 
   <body>
-    <div id="contenedor" class="container-fluid">
-        
+    <div class="container-fluid">
+      <div id="contenedor"></div>
+
+      <div id="buscador"> <!--Buscador-->
+        <div class="row" style="margin-top: 2%;">
+            
+              <div class="row" style="display: flex;justify-content: center;">
+                <div class="input-field col 8" style="width:40%;">
+                  <input id="buscadorProducto" type="text" autofocus ></input>
+                  <label for="buscadorProducto" >Ingrese codigo o nombre</label>
+                </div>
+                <div class="input-field col 4" style="margin-left:50px;">
+                  <button class="btn waves-effect waves-light green" style="width:150px;font-size:1.2em;font-weight: bold;" type="button" onclick="ListarReservas();" name="action">LISTAR<i class="material-icons left">add</i>
+                  </button>
+                </div>
+              </div>
+          </div>
     </div>
+
+    <div class="row" id="productos"> <!--Tabla Productos-->
+      <div class="col s9">
+          <div style="text-align: center;margin:30px;">
+            <h4>PRODUCTOS DE LA RESERVA</h4>
+          </div>
+    
+            <table class="responsive-table centered" id="tabla-reserva" >
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>CODIGO</th>
+                    <th>NOMBRE</th>
+                    <th>PRECIO</th>
+                    <th>ELIMINAR</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+            <div id="errorBusqueda" style="text-align: center;">
+
+            </div>
+      </div> 
+
+      <div class="col s3"> <!--  Opciones de la Reserva -->
+        <div style="text-align: center;margin:30px;">
+          <h4>OPCIONES</h4>
+        </div>
+        <div style="text-align: center;">
+          <div class="row">
+            <div class="input-field col s12">
+                <button class="btn waves-effect waves-light blue" style="width:150px" type="button" onclick="NuevoAjuste();" name="action">AJUSTE<i class="material-icons left">add</i>
+                </button>
+            </div> 
+            
+            
+            <div class="input-field col s12">
+              <button class="btn waves-effect waves-light red" style="width:150px" type="button" onclick="DescartarReserva();" name="action">DESCARTAR<i class="material-icons left">close</i>
+              </button>
+          </div>
+
+
+          <div class="input-field col s12">
+            <button class="btn waves-effect waves-light green" style="width:150px" type="button" onclick="GuardarReserva();" name="action">FINALIZAR<i class="material-icons left">add</i>
+            </button>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="display:flex;justify-content: center;"> <!-- Totalizador de la reserva-->
+      <div class="col" style="text-align: center;width:200px;" >
+        <div style="display:inline-flex">
+          
+          <i class="material-icons prefix" style="font-size:3em;">attach_money</i>
+          <input type="text" readonly id="totalizador" class="browser-default" style="text-decoration: none;font-size: 2em;border:0;width:150px;" value="0.00">
+        </div>
+      </div>
+    </div>
+
+    <div id="modalElegirproducto" class="modal"> <!--Elegir Producto-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Elegir articulo</h5>
+                  <form id="elegirproducto" class="col s12">
+                    <div class="row">
+                      <table class="responsive-table centered tabla-clientes" id="tabla-elegirproducto" >
+                        <thead>
+                          <tr>
+                              <th>CODIGO</th>
+                              <th>NOMBRE</th>
+                              <th>PRECIO</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarSeleccionarProducto();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalAjuste" class="modal"> <!-- Nuevo Ajuste -->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Nuevo Ajuste</h5>
+                  <form id="ajustes" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s4">
+                        <input type="text" value="" id="detalle_item">
+                        <label for="detalle_item">Detalle</label>
+                      </div>
+                      <div class="input-field col s4">
+                        <input type="text" value="" id="importe_item">
+                        <label for="importe_item">Importe</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="CargarAjuste();" name="action">Cargar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarCargarAjuste();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalMetodo" class="modal"> <!-- Metodo de pago -->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Metodo de pago</h5>
+                  <form id="metodo" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <input type="text" value=" " id="efectivo">
+                        <label for="efectivo">EFECTIVO</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input type="text" value="0.00" id="mp">
+                        <label for="mp">M. PAGO</label>
+                      </div>
+                      <div class="input-field col s2">
+                        <input type="text" value="0.00" id="tarjeta">
+                        <label for="tarjeta">TARJETA</label>
+                      </div>
+                      <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="CargarVenta();" name="action">FINALIZAR VENTA<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarMetodoPago();" name="action">CERRAR<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalListarReservas" class="modal modalCliente"> <!--Listar reservas-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>LISTA DE RESERVAS</h5>
+                  <form id="listareservas" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6" >
+                        <input type="date" id="filter_fecha_desde" onchange="ActualizarReservas();">
+                        <label for="filter_fecha_desde">DESDE: </label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input type="date" id="filter_fecha_hasta" onchange="ActualizarReservas();">
+                        <label for ="filter_fecha_hasta">HASTA: </label>
+                      </div>
+                     
+                    </div>
+                    <div class="row">
+                      <table class="responsive-table centered tabla-clientes" id="tabla-listarreservas" >
+                        <thead>
+                          <tr>
+                              <th>FECHA</th>
+                              <th>HORA</th>
+                              <th>TOTAL</th>
+                              <th>VENDEDOR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarListarReservas();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+    <div id="modalVerReserva" class="modal"> <!--Ver una reserva-->
+      <div class="modal-content">
+              <div class="row">
+                  <h5>Ver Reserva</h5>
+                  <form id="verVenta" class="col s12">
+                    <div class="row">
+                      <input type="text" hidden id="id_reserva">
+                      <table class="responsive-table centered tabla-clientes" id="tabla-verreserva" >
+                        <thead>
+                          <tr>
+                              <th>CODIGO</th>
+                              <th>NOMBRE</th>
+                              <th>PRECIO</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s4">
+                        <div style="display:inline-flex">
+                          <i class="material-icons prefix" style="font-size:3em;">attach_money</i>
+                          <input type="text" readonly id="totalizador_2" class="browser-default" style="text-decoration: none;font-size: 2em;border:0;width:150px;" value="0.00">
+                        </div>
+                      </div>
+                      <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light green" type="button" onclick="ConfirmarVenta();" name="action">Confirmar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light red" type="button" onclick="CerrarVerReserva();" name="action">Cerrar<i class="material-icons left">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      </div>
+    </div>
+
+
+  </div>
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="./js/reservas.js"></script>
     <script src="./js/validacionMenu.js"></script>
+    <script src="./js/reservas.js"></script>
   </body>
 </html>
