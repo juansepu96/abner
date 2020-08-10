@@ -10,11 +10,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
     <script src="./js/cute-alert.js"></script>
     <link rel="stylesheet" href="./styles/style2.css">
+    <script src="https://momentjs.com/downloads/moment.min.js"></script> <!--Moments Library-->
     <title>Contable - Abner </title>
   </head>
 
-  <body>
-    <div id="contenedor" class="container-fluid">
+  <body onload="CargarContable();">
+    <div class="container-fluid">
+      <div id="contenedor"></div>
+
+      <div class="row" id="filtros"> <!--Filtros-->
+        <h4 style="text-align: center;margin-top: 30px;">ELIJA LAS FECHAS PARA FILTRAR</h4>
+        <h5 style="text-align: center;">Por defecto se cargan los movimientos de los ultimos 3 meses</h5>
+        <div class="input-field col s6" >
+            <input type="date" id="filter_fecha_desde" onchange="ActualizarTabla();">
+            <label for="filter_fecha_desde">DESDE: </label>
+          </div>
+          <div class="input-field col s6">
+            <input type="date" id="filter_fecha_hasta" onchange="ActualizarTabla();">
+            <label for ="filter_fecha_hasta">HASTA: </label>
+          </div>             
+    </div>
+
+    <div class="row">
+        <table class="responsive-table centered tabla-caja" id="tabla-contable" > <!--Table-->
+            <thead>
+              <tr>
+                  <th>CUENTA</th>
+                  <th>TOTAL INGRESOS</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+         </table>
+    </div>
+
+    <div class="row">
+      <table class="responsive-table centered tabla-caja" id="tabla-contable2" > <!--Table-->
+          <thead>
+            <tr>
+                <th>TOTAL INGRESOS</th>
+                <th>COSTO MERCADERIA</th>
+                <th>TOTAL NETO</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+          </tbody>
+       </table>
+  </div>
+    
         
     </div>
     <!--JavaScript at end of body for optimized loading-->

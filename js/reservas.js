@@ -314,7 +314,6 @@ function CargarVenta(){
           if ( e == ("confirm")){
                 $.post("./php/ReservaAVenta.php",{valorBusqueda:datos}) 
                 .then((rta)=>{
-                    console.log(rta);
                   if(rta=="OK"){
                     cuteToast({
                         type: "success", // or 'info', 'error', 'warning'
