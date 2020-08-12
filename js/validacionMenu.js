@@ -2,14 +2,22 @@ $(document).ready(function() {
     $.post("./php/ObtenerRol.php")
     .then(function(rol) {
         if(rol==="admin"){
-            $("#contenedor").load('./menuAdmin.html');
+            $("#menu_admin").show();
         }
         if(rol==="vendedor"){
-            $("#contenedor").load('./menuVendedor.html');
+            $("#menu_vendedor").show();
         }
         if(rol==="revendedor"){
-            $("#contenedor").load('./menuRevendedor.html');
+            $("#menu_revendedor").show();
         }
         
-    });    
+    });  
+    
+    $('.sidenav').sidenav();
+
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });

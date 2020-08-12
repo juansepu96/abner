@@ -15,7 +15,85 @@
 
   <body onload="CargarUsuarios();"> 
     <div  class="container-fluid">
-      <div id="contenedor"></div>
+      <div hidden id="menu_admin"> <!--Menu de Navegacion admin-->
+        <nav>
+            <div class="nav-wrapper green">
+              <img src="./img/icono.png" style="width:65px;height:100%;margin-left:35px;">
+              <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="ventas.html"><i class="material-icons left">add_shopping_cart</i>Ventas</a></li>
+                <li><a href="reservas.html"><i class="material-icons left">shopping_cart</i>Reservas</a></li>
+                <li><a href="stock.html"><i class="material-icons left">store</i>Stock</a></li>
+                <li><a href="contable.html"><i class="material-icons left">account_balance</i>Contable</a></li>
+                <li><a href="usuarios.html"><i class="material-icons left">account_circle</i>Usuarios</a></li>
+                <li><a href="backup.php"><i class="material-icons left">cloud_download</i>Copia de Seguridad</a></li>
+                <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+              </ul>
+            </div>
+          </nav>
+          <ul id="slide-out" class="sidenav">
+            <li><div class="user-view" style="text-align: center;">
+              <div>
+                <img src="./img/icono.png">
+              </div>
+            </div></li>
+            <li><a href="ventas.html"><i class="material-icons left">add_shopping_cart</i>Ventas</a></li>
+            <li><a href="reservas.html"><i class="material-icons left">shopping_cart</i>Reservas</a></li>
+            <li><a href="stock.html"><i class="material-icons left">store</i>Stock</a></li>
+            <li><a href="contable.html"><i class="material-icons left">account_balance</i>Contable</a></li>
+            <li><a href="usuarios.html"><i class="material-icons left">account_circle</i>Usuarios</a></li>
+            <li><a href="backup.php"><i class="material-icons left">cloud_download</i>Copia de Seguridad</a></li>
+            <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+          </ul>
+    </div>
+
+    <div hidden id="menu_revendedor"> <!--Menu de Navegacion revendedor-->
+      <nav>
+          <div class="nav-wrapper green">
+            <img src="./img/icono.png" style="width:65px;height:100%;margin-left:35px;">
+            <a href="#" data-target="slide-out2" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="stock2.html"><i class="material-icons left">store</i>Stock</a></li>
+              <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+            </ul>
+    
+            
+          </div>
+        </nav>
+        <ul id="slide-out2" class="sidenav">
+          <li><div class="user-view" style="text-align: center;">
+            <div>
+              <img src="./img/icono.png">
+            </div>
+          </div></li>
+          <li><a href="stock2.html"><i class="material-icons left">store</i>Stock</a></li>
+          <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+        </ul>
+    </div>
+
+    <div hidden id="menu_vendedor"> <!--Menu de Navegacion vendedor-->
+      <nav>
+          <div class="nav-wrapper green">
+            <img src="./img/icono.png" style="width:65px;height:100%;margin-left:35px;">
+            <a href="#" data-target="slide-out3" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="ventas.html"><i class="material-icons left">add_shopping_cart</i>Ventas</a></li>
+              <li><a href="reservas.html"><i class="material-icons left">shopping_cart</i>Reservas</a></li>
+              <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+            </ul>
+          </div>
+        </nav>
+        <ul id="slide-out3" class="sidenav">
+          <li><div class="user-view" style="text-align: center;">
+            <div>
+              <img src="./img/icono.png">
+            </div>
+          </div></li>
+          <li><a href="ventas.html"><i class="material-icons left">add_shopping_cart</i>Ventas</a></li>
+          <li><a href="reservas.html"><i class="material-icons left">shopping_cart</i>Reservas</a></li>
+          <li><a href="cerrar.html"><i class="material-icons left">close</i>Cerrar Sesion</a></li>
+        </ul>
+    </div>
 
       <div id="buscador"> <!--Buscador-->
         <div class="row" style="margin-left:27%;margin-top: 2%;">
