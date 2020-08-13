@@ -12,6 +12,7 @@ $hasta=$datos[1];
 
 $total=0;
 $costo=0;
+$comisiones = 0;
 
 $ObtenerVentas=$conexion->prepare("SELECT * FROM sales WHERE date BETWEEN :fecha1 AND :fecha2");
 $ObtenerVentas -> bindParam (':fecha1',$desde);
@@ -27,11 +28,13 @@ foreach ($ObtenerVentas as $Venta){
         $costo=$costo+floatval($Detail['costo']);
     }
     $total=$total+floatval($Venta['total']);
+    $comisiones = $comisiones + floatval($Venta['reseller']);
 }
 
 $resultado = (object) [
     "total" => $total,
     'costo' => $costo,
+    'comisiones' => $comisiones,
 ];
 
 

@@ -24,11 +24,13 @@ function CargarContable(){
         e = JSON.parse(rta);
         total = parseFloat(e.total);
         costo = parseFloat(e.costo);
+        comisiones = parseFloat(e.comisiones);
         resultado = total-costo;
             var htmlTags = '<tr class="filaContable">' +
                     '<td scope="row"> $ ' + total.toFixed(2) + '</td>' +
                     '<td scope="row"> $ ' + costo.toFixed(2) + '</td>' +
-                    '<td style="font-weight:bold;"> $ ' + resultado.toFixed(2) + '</td></tr>';
+                    '<td style="font-weight:bold;"> $ ' + resultado.toFixed(2) + '</td>'+
+                    '<td scope="row"> $' + comisiones.toFixed(2) + '</td> </tr>' ;
             $('#tabla-contable2 tbody').append(htmlTags);
     });
 }
@@ -56,11 +58,13 @@ function ActualizarTabla(){
         e = JSON.parse(rta);
         total = parseFloat(e.total);
         costo = parseFloat(e.costo);
+        comisiones = parseFloat(e.comisiones);
         resultado = total-costo;
             var htmlTags = '<tr class="filaContable">' +
                     '<td scope="row">' + total.toFixed(2) + '</td>' +
                     '<td scope="row">' + costo.toFixed(2) + '</td>' +
-                    '<td style="font-weight:bold;"> $ ' + resultado.toFixed(2) + '</td></tr>';
+                    '<td style="font-weight:bold;"> $ ' + resultado.toFixed(2) + '</td>'+
+                    '<td scope="row"> $' + comisiones.toFixed(2) + '</td> </tr>' ;
             $('#tabla-contable2 tbody').append(htmlTags);
     });
 
