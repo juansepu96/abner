@@ -16,19 +16,21 @@ $ObtenerReserva->execute();
 
 
 foreach ($ObtenerReserva as $Datos){
-    array_push($encabezado,$Datos['date'],$Datos['time'],$Datos['total'],$info[0],$info[1],$info[2],$Datos['saler']);
+    array_push($encabezado,$Datos['date'],$Datos['time'],$Datos['total'],$info[0],$info[1],$info[2],$info[3],$info[4],$Datos['saler']);
     break;
 }
 
 
-$InsertarEncabezado = $conexion->prepare("INSERT INTO sales (date,time,total,total_cash,total_mp,total_card,saler) VALUES (:date,:time,:total,:total_cash,:total_mp,:total_card,:saler)");
+$InsertarEncabezado = $conexion->prepare("INSERT INTO sales (date,time,total,total_cash,total_mp,total_card,saler,reseller,reseller_total) VALUES (:date,:time,:total,:total_cash,:total_mp,:total_card,:saler,:reseller,:reseller_total)");
 $InsertarEncabezado -> bindParam(':date',$encabezado[0]);
 $InsertarEncabezado -> bindParam(':time',$encabezado[1]);
 $InsertarEncabezado -> bindParam(':total',$encabezado[2]);
 $InsertarEncabezado -> bindParam(':total_cash',$encabezado[3]);
 $InsertarEncabezado -> bindParam(':total_mp',$encabezado[4]);
 $InsertarEncabezado -> bindParam(':total_card',$encabezado[5]);
-$InsertarEncabezado -> bindParam(':saler',$encabezado[6]);
+$InsertarEncabezado -> bindParam(':reseller',$encabezado[6]);
+$InsertarEncabezado -> bindParam(':reseller_total',$encabezado[7]);
+$InsertarEncabezado -> bindParam(':saler',$encabezado[8]);
 $InsertarEncabezado -> execute();
 
 $ObtenerUltimoEncabezado = $conexion->query("SELECT * from sales ORDER BY ID DESC LIMIT 1");

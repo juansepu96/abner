@@ -258,7 +258,11 @@ function CargarVenta(){
   tarjeta = parseFloat(tarjeta);
   total = $("#totalizador").val();
   total = parseFloat(total);
-  datos.push(total,efectivo,mp,tarjeta);
+  comision = $("#comi_revendedor").val();
+  comision = comision.replace(",",".");
+  comision = parseFloat(comision);
+  revendedor = $("#nom_revendedor").val();
+  datos.push(total,efectivo,mp,tarjeta,comision,revendedor);
   datos = JSON.stringify(datos);
   if(total == (efectivo+mp+tarjeta)){
     CerrarMetodoPago();
@@ -343,6 +347,8 @@ function ListarVentas(){
         mp = mp.toFixed(2);
         tarjeta = parseFloat(rta[i].total_card);
         tarjeta = tarjeta.toFixed(2);
+        comision = parseFloat(rta[i].reseller);
+        comsiion = comision.toFixed(2);
         var htmlTags = '<tr class="filaVentas" onclick="VerVenta('+rta[i].ID+');">' +
                         '<td>' + fecha + '</td>'+
                         '<td>' + rta[i].time + '</td>'+
@@ -351,6 +357,8 @@ function ListarVentas(){
                         '<td> $ ' + mp + '</td>'+
                         '<td> $ ' + tarjeta + '</td>'+
                         '<td>' + rta[i].saler + '</td>'+
+                        '<td> $' + comision + '</td>'+
+                        '<td>' + rta[i].reseller_total + '</td>'+
                         '</tr>';
         $('#tabla-listarventas tbody').append(htmlTags);
       }

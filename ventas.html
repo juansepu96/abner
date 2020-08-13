@@ -11,6 +11,7 @@
     <script src="https://momentjs.com/downloads/moment.min.js"></script> <!--Moments Library-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
     <script src="./js/cute-alert.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/style2.css">
     <script src="https://momentjs.com/downloads/moment.min.js"></script> <!--Moments Library-->
     
@@ -243,15 +244,15 @@
                   <h5>Metodo de pago</h5>
                   <form id="metodo" class="col s12">
                     <div class="row">
-                      <div class="input-field col s2">
+                      <div class="input-field col s3">
                         <input type="text" value=" " id="efectivo">
                         <label for="efectivo">EFECTIVO</label>
                       </div>
-                      <div class="input-field col s2">
+                      <div class="input-field col s3">
                         <input type="text" value="0.00" id="mp">
                         <label for="mp">M. PAGO</label>
                       </div>
-                      <div class="input-field col s2">
+                      <div class="input-field col s3">
                         <input type="text" value="0.00" id="tarjeta">
                         <label for="tarjeta">TARJETA</label>
                       </div>
@@ -259,7 +260,17 @@
                         <button class="btn waves-effect waves-light green" type="button" onclick="CargarVenta();" name="action">FINALIZAR VENTA<i class="material-icons left">add</i>
                         </button>
                       </div>
-                      <div class="input-field col s3">
+                    </div>
+                      <div class="row">
+                        <div class="input-field col s3">
+                          <input type="text" value="0.00" id="comi_revendedor">
+                          <label for="comi_revendedor">COMISIÓN REVENDEDOR</label>
+                        </div>
+                        <div class="input-field col s5">
+                          <input type="text" value=" " id="nom_revendedor">
+                          <label for="nom_revendedor">REVENDEDOR</label>
+                        </div>
+                      <div class="input-field col s4">
                         <button class="btn waves-effect waves-light red" type="button" onclick="CerrarMetodoPago();" name="action">CERRAR<i class="material-icons left">close</i>
                         </button>
                       </div>
@@ -296,6 +307,8 @@
                               <th>M. PAGO</th>
                               <th>TARJETA</th>
                               <th>VENDEDOR</th>
+                              <th>COMISION</th>
+                              <th>REVENDEDOR</th>
                           </tr>
                         </thead>
                         <tbody>

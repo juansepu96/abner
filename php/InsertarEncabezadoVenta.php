@@ -11,7 +11,7 @@ $saler=$_SESSION['name'];
 
 $rta=null;
 
-$InsertarEncabezado = $conexion->prepare("INSERT INTO sales (date,time,total,total_cash,total_mp,total_card,saler) VALUES (:date,:time,:total,:total_cash,:total_mp,:total_card,:saler)");
+$InsertarEncabezado = $conexion->prepare("INSERT INTO sales (date,time,total,total_cash,total_mp,total_card,saler,reseller,reseller_total) VALUES (:date,:time,:total,:total_cash,:total_mp,:total_card,:saler,:reseller,:reseller_total)");
 $InsertarEncabezado -> bindParam(':date',$date);
 $InsertarEncabezado -> bindParam(':time',$time);
 $InsertarEncabezado -> bindParam(':total',$datos[0]);
@@ -19,6 +19,8 @@ $InsertarEncabezado -> bindParam(':total_cash',$datos[1]);
 $InsertarEncabezado -> bindParam(':total_mp',$datos[2]);
 $InsertarEncabezado -> bindParam(':total_card',$datos[3]);
 $InsertarEncabezado -> bindParam(':saler',$saler);
+$InsertarEncabezado -> bindParam(':reseller',$datos[4]);
+$InsertarEncabezado -> bindParam(':reseller_total',$datos[5]);
 if($InsertarEncabezado -> execute()){
     $ObtenerUltimoEncabezado = $conexion->query("SELECT * from sales ORDER BY ID DESC LIMIT 1");
     foreach($ObtenerUltimoEncabezado as $Encabezado){

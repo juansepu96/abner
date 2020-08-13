@@ -300,7 +300,11 @@ function CargarVenta(){
   tarjeta = $("#tarjeta").val();
   tarjeta= tarjeta.replace(",",".");
   tarjeta = parseFloat(tarjeta);
-  datos.push(efectivo,mp,tarjeta,id);
+  comision = $("#comi_revendedor").val();
+  comision = comision.replace(",",".");
+  comision = parseFloat(comision);
+  revendedor = $("#nom_revendedor").val();
+  datos.push(efectivo,mp,tarjeta,comision,revendedor,id);
   datos = JSON.stringify(datos);
   if(total == (efectivo+mp+tarjeta)){
     CerrarMetodoPago();
