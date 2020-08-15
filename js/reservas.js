@@ -374,11 +374,12 @@ function ListarReservas(){
         total = parseFloat(rta[i].total);
         total = total.toFixed(2);
        
-        var htmlTags = '<tr class="filaReservas" onclick="VerReserva('+rta[i].ID+');">' +
-                        '<td>' + fecha + '</td>'+
-                        '<td>' + rta[i].time + '</td>'+
-                        '<td> $ ' + total + '</td>'+
-                        '<td>' + rta[i].saler + '</td>'+
+        var htmlTags = '<tr class="filaReservas" >' +
+                        '<td onclick="VerReserva('+rta[i].ID+');"> ' + fecha + '</td>'+
+                        '<td onclick="VerReserva('+rta[i].ID+');">' + rta[i].time + '</td>'+
+                        '<td onclick="VerReserva('+rta[i].ID+');"> $ ' + total + '</td>'+
+                        '<td onclick="VerReserva('+rta[i].ID+');">' + rta[i].saler + '</td>'+
+                        '<td><div class="eliminar"><i onclick="EliminarReserva('+rta[i].ID+')" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
                         '</tr>';
         $('#tabla-listarreservas tbody').append(htmlTags);
       }
@@ -498,4 +499,36 @@ function CerrarVerReserva(){
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.close();
   AbrirListarReservas();
+}
+
+function EliminarReserva(id){
+  CerrarVerReserva();
+  CerrarListarReservas();
+  cuteAlert({
+    type: "question",
+    title: "¿REALMENTE QUIERE ELIMINAR LA RESERVA?",
+    message: "ESTA ACCION ES IRREVERSIBLE",
+    confirmText: "Aceptar",
+    cancelText: "Cancelar"
+    }).then((e)=>{
+        if ( e == ("confirm")){
+          $.post("./php/EliminarReserva.php",{valorBusqueda:id})
+          .then(()=>{
+            cuteToast({
+              type: "success", // or 'info', 'error', 'warning'
+              message: "SE ELIMINÓ LA RESERVA",
+              timer: 3000
+            });
+            ListarReservas();
+          })
+          
+      } else {
+        cuteToast({
+            type: "info", // or 'info', 'error', 'warning'
+            message: "ACCION CANCELADA",
+            timer: 3000
+          })
+        }
+  })
+
 }
