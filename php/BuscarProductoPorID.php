@@ -4,7 +4,7 @@ require_once "pdo.php";
 
 $dato=$_POST['valorBusqueda'];
 
-$ObtenerProducto = $conexion->prepare("SELECT * from products WHERE ID=:dato");
+$ObtenerProducto = $conexion->prepare("SELECT * from products WHERE ID=:dato AND stock>0");
 $ObtenerProducto->bindParam(':dato',$dato);
 $ObtenerProducto->execute();
 

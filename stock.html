@@ -161,7 +161,7 @@
                         <label for="precio_s">Precio de Venta</label>
                       </div>
                       <div class="input-field col s2">
-                        <input  id="stock" required type="text" value=" ">
+                        <input  id="stock" required type="text" value="1">
                         <label for="stock">Stock</label>
                       </div>
                       <div class="input-field col s2">
@@ -196,11 +196,11 @@
                     </div>
 
                     <div class="row">
-                      <div class="input-field col s3">
+                      <div class="input-field col s2">
                         <input  id="precio_p_producto" required type="text" value=" ">
                         <label for="precio_p_producto">Precio de Compra</label>
                       </div>
-                      <div class="input-field col s3">
+                      <div class="input-field col s2">
                         <input  id="precio_s_producto" required type="text" value=" ">
                         <label for="precio_s_producto">Precio de Venta</label>
                       </div>
@@ -210,6 +210,10 @@
                       </div>
                       <div class="input-field col s2">
                         <button class="btn waves-effect waves-light green" type="button" onclick="ActualizarProducto();" name="action">Actualizar<i class="material-icons left">add</i>
+                        </button>
+                      </div>
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light orange" type="button" onclick="BorrarProducto();" name="action">Borrar<i class="material-icons left"></i>
                         </button>
                       </div>
                       <div class="input-field col s2">
