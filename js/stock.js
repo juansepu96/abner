@@ -178,3 +178,46 @@ function ActualizarProducto(){
           })
     }
 }
+
+function BorrarProducto(){
+    id=$("#id_producto").val();
+    CerrarEditarProducto();
+    cuteAlert({
+        type: "question",
+        title: "¿REALMENTE QUIERE ELIMINAR EL PRODUCTO?",
+        message: "ESTA ACCION ES IRREVERSIBLE",
+        confirmText: "Aceptar",
+        cancelText: "Cancelar"
+        }).then((e)=>{
+            if ( e == ("confirm")){
+            $.post("./php/EliminarProducto.php",{valorBusqueda:id})
+            .then((rta)=>{
+                if(rta=='OK'){
+                    cuteToast({
+                        type: "success", // or 'info', 'error', 'warning'
+                        message: "PRODUCTO ELIMINADO CON EXITO",
+                        timer: 3000
+                    });
+                    CargarProductos();
+                }else{
+                    cuteToast({
+                        type: "error", // or 'info', 'error', 'warning'
+                        message: "ERROR AL ELIMINAR PRODUCTO. CONSULTE AL ADMINISTRADOR",
+                        timer: 3000
+                    });
+                    AbrirProducto(id);
+                }
+            })
+           
+        } else {
+            cuteToast({
+                type: "info", // or 'info', 'error', 'warning'
+                message: "ACCION CANCELADA",
+                timer: 3000
+            })
+            
+            AbrirProducto(id);
+            }
+        })
+
+}
