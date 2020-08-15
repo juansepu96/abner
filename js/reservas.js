@@ -422,28 +422,71 @@ function ActualizarReservas(){
   })
 }
 
+function EliminarProducto(id){
+  id_reserva=$("#id_reserva").val();
+  CerrarVerReserva();
+  CerrarListarReservas();
+        $.post("./php/EliminarProductoDeReserva.php",{valorBusqueda:id})
+        .then((rta)=>{
+            if(rta=='OK'){
+                cuteToast({
+                    type: "success", // or 'info', 'error', 'warning'
+                    message: "SE QUITO EL PRODUCTO DE ESTA RESERVA",
+                    timer: 3000
+                });
+                $.post("./php/ReCalcularTotalReserva.php",{valorBusqueda:id_reserva})
+                .then((tipo)=> {
+                  if(tipo=="1"){ 
+                    ListarReservas();
+                    VerReserva(id_reserva);
+                  }else{
+                    cuteToast({
+                      type: "warning", // or 'info', 'error', 'warning'
+                      message: "SE ELIMINÓ LA RESERVA",
+                      timer: 3000
+                  });
+                    ListarReservas();
+                  }                  
+                })
+            }else{
+                cuteToast({
+                    type: "error", // or 'info', 'error', 'warning'
+                    message: "ERROR AL QUITAR PRODUCTO. CONSULTE AL ADMINISTRADOR",
+                    timer: 3000
+                });
+                VerReserva(id_reserva);
+            }
+        })
+}
+
+function AumentarStock2(code){
+  $.post("./php/AumentarStockbyCode.php",{valorBusqueda:code});
+}
+
 function VerReserva(id){
   $("#id_reserva").val(id);
   $(".filaVerReserva").remove();
-  $.post('./php/ObtenerReserva.php',{valorBusqueda:id})
-  .then((array)=>{
-    total=0;
-    array = JSON.parse(array);
-    for(var i = 0;i<array.length;i++){
-      precio = parseFloat(array[i].price_s);
-      total=total+precio;
-      precio = precio.toFixed(2);
-      var htmlTags = '<tr class="filaVerReserva">' +
-                      '<td>' + array[i].code + '</td>'+
-                      '<td>' + array[i].name + '</td>'+
-                      '<td> $' + precio + '</td>'+
-                      '</tr>';
-      $('#tabla-verreserva tbody').append(htmlTags);
-    }
-  });
-  total=parseFloat(total);
-  total = total.toFixed(2);
-  $("#totalizador_2").val(total);
+  $.post('./php/ObtenerTotalReserva.php',{valorBusqueda:id})
+  .then((total)=>{
+    total = parseFloat(total);
+    total = total.toFixed(2);
+    $("#totalizador_2").val(total);
+    $.post('./php/ObtenerReserva.php',{valorBusqueda:id})
+      .then((array)=>{
+        array = JSON.parse(array);
+        for(var i = 0;i<array.length;i++){
+          precio = parseFloat(array[i].price_s);
+          precio = precio.toFixed(2);
+          var htmlTags = '<tr class="filaVerReserva">' +
+                          '<td>' + array[i].code + '</td>'+
+                          '<td>' + array[i].name + '</td>'+
+                          '<td> $' + precio + '</td>'+
+                          '<td><div class="eliminar"><i onclick="EliminarProducto('+array[i].ID+');AumentarStock2('+array[i].code+');" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
+                          '</tr>';
+          $('#tabla-verreserva tbody').append(htmlTags);
+        }
+      });
+  })
   CerrarListarReservas();
   const elem = document.getElementById('modalVerReserva');
   const instance = M.Modal.init(elem, {dismissible: false});
