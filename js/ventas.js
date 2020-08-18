@@ -468,14 +468,18 @@ function ActualizarVentas(){
         mp = mp.toFixed(2);
         tarjeta = parseFloat(rta[i].total_card);
         tarjeta = tarjeta.toFixed(2);
-        var htmlTags = '<tr class="filaVentas" onclick="VerVenta('+rta[i].ID+');">' +
-                        '<td>' + fecha + '</td>'+
-                        '<td>' + rta[i].time + '</td>'+
-                        '<td> $ ' + total + '</td>'+
-                        '<td> $ ' + efectivo + '</td>'+
-                        '<td> $ ' + mp + '</td>'+
-                        '<td> $ ' + tarjeta + '</td>'+
-                        '<td>' + rta[i].saler + '</td>'+
+        var htmlTags = '<tr class="filaVentas" >' +
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + fecha + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].time + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + total + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + efectivo + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + mp + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + tarjeta + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].saler + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $' + comision + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].reseller_total + '</td>'+
+                        '<td onclick="CambiarEstado('+rta[i].ID+');">' + rta[i].state + '</td>'+
+                        '<td><div class="eliminar"><i onclick="EliminarVenta('+rta[i].ID+');" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
                         '</tr>';
         $('#tabla-listarventas tbody').append(htmlTags);
       }
