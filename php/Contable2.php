@@ -28,7 +28,9 @@ foreach ($ObtenerVentas as $Venta){
         $costo=$costo+floatval($Detail['costo']);
     }
     $total=$total+floatval($Venta['total']);
-    $comisiones = $comisiones + floatval($Venta['reseller']);
+    if($Venta['state']=="IMPAGA"){
+        $comisiones = $comisiones + floatval($Venta['reseller']);
+    }
 }
 
 $resultado = (object) [

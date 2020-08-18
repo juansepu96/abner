@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function() {
+    $('select').formSelect();
     $("#buscadorProducto").on('keyup', function (e) {
     e.preventDefault();
     var keycode = e.keyCode || e.which;
@@ -39,7 +40,7 @@ function ActualizarTabla(array){
                     '<td scope="row">' + i + '</td>' +
                     '<td>' + array[i].codigo + '</td>'+
                     '<td>' + array[i].nombre + '</td>'+
-                    '<td> $' + precio + '</td>'+
+                    '<td> $' + precio + '</td>'+                    
                     '<td><div class="eliminar"><i onclick="EliminarItem('+i+');AumentarStock('+array[i].id+');" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
                     '</tr>';
     $('#tabla-venta tbody').append(htmlTags);
@@ -349,16 +350,18 @@ function ListarVentas(){
         tarjeta = tarjeta.toFixed(2);
         comision = parseFloat(rta[i].reseller);
         comsiion = comision.toFixed(2);
-        var htmlTags = '<tr class="filaVentas" onclick="VerVenta('+rta[i].ID+');">' +
-                        '<td>' + fecha + '</td>'+
-                        '<td>' + rta[i].time + '</td>'+
-                        '<td> $ ' + total + '</td>'+
-                        '<td> $ ' + efectivo + '</td>'+
-                        '<td> $ ' + mp + '</td>'+
-                        '<td> $ ' + tarjeta + '</td>'+
-                        '<td>' + rta[i].saler + '</td>'+
-                        '<td> $' + comision + '</td>'+
-                        '<td>' + rta[i].reseller_total + '</td>'+
+        var htmlTags = '<tr class="filaVentas" >' +
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + fecha + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].time + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + total + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + efectivo + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + mp + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $ ' + tarjeta + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].saler + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');"> $' + comision + '</td>'+
+                        '<td onclick="VerVenta('+rta[i].ID+');">' + rta[i].reseller_total + '</td>'+
+                        '<td onclick="CambiarEstado('+rta[i].ID+');">' + rta[i].state + '</td>'+
+                        '<td><div class="eliminar"><i onclick="EliminarVenta('+rta[i].ID+');" style="font-size:30px;" class="material-icons eliminar">delete</i> </div></td>'+
                         '</tr>';
         $('#tabla-listarventas tbody').append(htmlTags);
       }
@@ -367,6 +370,75 @@ function ListarVentas(){
   const elem = document.getElementById('modalListarVentas');
   const instance = M.Modal.init(elem, {dismissible: false});
   instance.open();
+}
+
+function CambiarEstado(id){
+  $("#id_orden_editar_estado").val(id);
+  const elem = document.getElementById('modalEditarEstado');
+  const instance = M.Modal.init(elem, {dismissible: false});
+  instance.open();
+}
+
+function CerrarEditarEstado(){
+  const elem = document.getElementById('modalEditarEstado');
+  const instance = M.Modal.init(elem, {dismissible: false});
+  instance.close();
+}
+
+function ActualizarEstadoOrden(){
+  var datos=[];
+  id=$("#id_orden_editar_estado").val();
+  estado=$("#nuevo_estado_orden").val();
+  datos.push(id,estado);
+  datos = JSON.stringify(datos);
+  $.post("./php/ActualizarEstadoOrden.php",{valorBusqueda:datos}, function(rta) {
+      if(rta==='OK'){
+          cuteToast({
+              type: "success", // or 'info', 'error', 'warning'
+              message: "ESTADO DE LA COMISION ACTUALIZADO CON EXITO",
+              timer: 3000
+            })
+          CerrarEditarEstado();
+          ListarVentas();
+      }else{
+          cuteToast({
+              type: "error", // or 'info', 'error', 'warning'
+              message: "ERROR AL ACTUALIZAR EL ESTADO. CONTACTE AL ADMINISTRADOR",
+              timer: 3000
+            })
+      }
+  });   
+}
+
+function EliminarVenta(id){
+  CerrarListarVentas();
+  cuteAlert({
+    type: "question",
+    title: "¿REALMENTE QUIERE ELIMINAR LA VENTA?",
+    message: "ESTA ACCION ES IRREVERSIBLE",
+    confirmText: "Aceptar",
+    cancelText: "Cancelar"
+    }).then((e)=>{
+        if ( e == ("confirm")){
+          console.log(id);
+          $.post("./php/EliminarVenta.php",{valorBusqueda:id})
+          .then(()=>{
+            cuteToast({
+              type: "success", // or 'info', 'error', 'warning'
+              message: "SE ELIMINÓ LA VENTA",
+              timer: 3000
+            });
+            ListarVentas();
+          })
+          
+      } else {
+        cuteToast({
+            type: "info", // or 'info', 'error', 'warning'
+            message: "ACCION CANCELADA",
+            timer: 3000
+          })
+        }
+  })
 }
 
 function CerrarListarVentas(){
