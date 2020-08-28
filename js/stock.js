@@ -66,6 +66,9 @@ function Cerrar(){
     const elem = document.getElementById('modalNuevoProducto');
     const instance = M.Modal.init(elem, {dismissible: false});
     instance.close();
+    var scroll= { "overflow": 'scroll'};
+    $("body").css(scroll);
+
 }
 
 function cargarProducto(){
@@ -136,6 +139,8 @@ function CerrarEditarProducto(){
     const elem = document.getElementById('modalEditarProducto');
     const instance = M.Modal.init(elem, {dismissible: false});
     instance.close();
+    var scroll= { "overflow": 'scroll'};
+    $("body").css(scroll);
 }
 
 function ActualizarProducto(){

@@ -12,7 +12,7 @@ function Acceder(){
                 window.location.replace("ventas.html");
             }
             if(rta==="revendedor"){
-                window.location.replace("stock.html");
+                window.location.replace("stock2.html");
             }
         }else{
             cuteToast({
